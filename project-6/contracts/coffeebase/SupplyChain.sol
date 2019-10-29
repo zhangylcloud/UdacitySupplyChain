@@ -91,15 +91,15 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
         _;
         uint _price = items[_upc].productPrice;
         uint amountToReturn = msg.value - _price;
-        items[_upc].consumerID.transfer(amountToReturn);
+        msg.sender.transfer(amountToReturn);
     }
 
-    modifier checkValueDistributor(uint _upc) {
-        _;
-        uint _price = items[_upc].productPrice;
-        uint amountToReturn = msg.value - _price;
-        items[_upc].distributorID.transfer(amountToReturn);
-    }
+    //modifier checkValueDistributor(uint _upc) {
+    //    _;
+    //    uint _price = items[_upc].productPrice;
+    //    uint amountToReturn = msg.value - _price;
+    //    items[_upc].distributorID.transfer(amountToReturn);
+    //}
   
     // Define a modifier that checks if an item.state of a upc is Harvested
     modifier harvested(uint _upc) {
@@ -167,7 +167,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   
     // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
     function harvestItem(uint              _upc, 
-                         address           _originFarmerID, 
+                         address payable   _originFarmerID, 
                          string memory     _originFarmName, 
                          string memory     _originFarmInformation, 
                          string memory     _originFarmLatitude, 
@@ -224,7 +224,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
     // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
     // Use the above defined modifiers to check if the item is available for sale, if the buyer has paid enough, 
     // and any excess ether sent is refunded back to the buyer
-    function buyItem(uint _upc) forSale(_upc) paidEnough(items[_upc].productPrice) checkValueDistributor(_upc) onlyDistributor() public payable 
+    function buyItem(uint _upc) forSale(_upc) paidEnough(items[_upc].productPrice) checkValue(_upc) onlyDistributor() public payable 
     {
       
         // Update the appropriate fields - ownerID, distributorID, itemState
@@ -249,28 +249,34 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   
     // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
     // Use the above modifiers to check if the item is shipped
-    function receiveItem(uint _upc) shipped(_upc) onlyRetailer() public 
-      // Call modifier to check if upc has passed previous supply chain stage
-      
-      // Access Control List enforced by calling Smart Contract / DApp
+    function receiveItem(uint _upc) shipped(_upc) onlyRetailer() public payable
     {
         // Update the appropriate fields - ownerID, retailerID, itemState
-        
+        items[_upc].ownerID = msg.sender;
+        items[_upc].retailerID = msg.sender;
+        items[_upc].itemState = State.Received;
+
+        // Transfer money to distributor
+        items[_upc].distributorID.transfer(items[_upc].productPrice);
+
         // Emit the appropriate event
-      
+        emit Received(_upc);
     }
   
     // Define a function 'purchaseItem' that allows the consumer to mark an item 'Purchased'
     // Use the above modifiers to check if the item is received
-    function purchaseItem(uint _upc) public 
-      // Call modifier to check if upc has passed previous supply chain stage
-      
-      // Access Control List enforced by calling Smart Contract / DApp
+    function purchaseItem(uint _upc) received(_upc) onlyConsumer() public payable
     {
-      // Update the appropriate fields - ownerID, consumerID, itemState
-      
-      // Emit the appropriate event
-      
+        // Update the appropriate fields - ownerID, consumerID, itemState
+        items[_upc].ownerID = msg.sender;
+        items[_upc].consumerID = msg.sender;
+        items[_upc].itemState = State.Purchased;
+
+        // Transfer money to retailer
+        items[_upc].retailerID.transfer(items[_upc].productPrice);
+
+        // Emit the appropriate event
+        emit Purchased(_upc);
     }
   
     // Define a function 'fetchItemBufferOne' that fetches the data
