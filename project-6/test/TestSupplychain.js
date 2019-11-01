@@ -1,6 +1,6 @@
 // This script is designed to test the solidity smart contract - SuppyChain.sol -- and the various functions within
 // Declare a variable and assign the compiled smart contract artifact
-//const truffleAssert = require('truffle-assertions')
+const truffleAssert = require('truffle-assertions')
 var SupplyChain = artifacts.require('SupplyChain')
 
 contract('SupplyChain', function(accounts) {
@@ -45,7 +45,7 @@ contract('SupplyChain', function(accounts) {
     // 1st Test
     it("Testing smart contract function harvestItem() that allows a farmer to harvest coffee", async() => {
         const supplyChain = await SupplyChain.deployed()
-        
+        await supplyChain.addFarmer(originFarmerID);
         // Declare and Initialize a variable for event
         var eventEmitted = false
         
@@ -55,17 +55,20 @@ contract('SupplyChain', function(accounts) {
         //    eventEmitted = true
         //})
 
-        console.log(supplyChain.events);
+        //console.log(supplyChain.events);
 
-        supplyChain.events.allEvents({}, () => {
-            eventEmitted = true});
+        //supplyChain.Processed(() => {
+        //    console.log("asdlkasjf");
+        //    eventEmitted = true});
 
         // Mark an item as Harvested by calling function harvestItem()
-        await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
+        let result = await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
+
+        //console.log(resultBufferOne);
 
         // Verify the result set
         assert.equal(resultBufferOne[0], sku, 'Error: Invalid item SKU')
@@ -77,10 +80,10 @@ contract('SupplyChain', function(accounts) {
         assert.equal(resultBufferOne[6], originFarmLatitude, 'Error: Missing or Invalid originFarmLatitude')
         assert.equal(resultBufferOne[7], originFarmLongitude, 'Error: Missing or Invalid originFarmLongitude')
         assert.equal(resultBufferTwo[5], 0, 'Error: Invalid item State')
-        assert.equal(eventEmitted, true, 'Invalid event emitted')
-        //truffleAssert.eventEmitted(result, Harvested, (ev) => {
-        //    return ev.param1 === 1;
-        //})        
+        //assert.equal(eventEmitted, true, 'Invalid event emitted')
+        truffleAssert.eventEmitted(result, "Harvested", (ev) => {
+            return ev.upc.toNumber() === 1;
+        })        
     })    
 
     // 2nd Test

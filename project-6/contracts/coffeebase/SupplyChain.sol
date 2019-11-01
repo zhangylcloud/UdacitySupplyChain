@@ -289,16 +289,15 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
                                                                 string memory originFarmLatitude,
                                                                 string memory originFarmLongitude) 
     {
-    // Assign values to the 8 parameters
-        return (
-            itemSKU,
-            itemUPC,
-            ownerID,
-            originFarmerID,
-            originFarmName,
-            originFarmInformation,
-            originFarmLatitude,
-            originFarmLongitude);
+        // Assign values to the 8 parameters
+        itemSKU = items[_upc].sku;
+        itemUPC = items[_upc].upc;
+        ownerID = items[_upc].ownerID;
+        originFarmerID = items[_upc].originFarmerID;
+        originFarmName = items[_upc].originFarmName;
+        originFarmInformation = items[_upc].originFarmInformation;
+        originFarmLatitude = items[_upc].originFarmLatitude;
+        originFarmLongitude = items[_upc].originFarmLongitude;
     }
   
     // Define a function 'fetchItemBufferTwo' that fetches the data
@@ -313,15 +312,14 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
                                                                 address        consumerID) 
     {
       // Assign values to the 9 parameters
-        return (
-            itemSKU,
-            itemUPC,
-            productID,
-            productNotes,
-            productPrice,
-            itemState,
-            distributorID,
-            retailerID,
-            consumerID);
-        }
+        itemSKU = items[_upc].sku;
+        itemUPC = items[_upc].upc;
+        productID = items[_upc].productID;
+        productNotes = items[_upc].productNotes;
+        productPrice = items[_upc].productPrice;
+        itemState = uint(items[_upc].itemState);
+        distributorID = items[_upc].distributorID;
+        retailerID = items[_upc].retailerID;
+        consumerID = items[_upc].consumerID;
+    }
 }
