@@ -196,7 +196,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
     function processItem(uint _upc) harvested(_upc) verifyCaller(items[_upc].ownerID) onlyFarmer() public 
     {
         // Update the appropriate fields
-        items[_upc].itemState = State.Harvested;
+        items[_upc].itemState = State.Processed;
         // Emit the appropriate event
         emit Processed(_upc);
     }
