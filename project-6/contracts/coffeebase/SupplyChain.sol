@@ -226,7 +226,6 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
     // and any excess ether sent is refunded back to the buyer
     function buyItem(uint _upc) forSale(_upc) paidEnough(items[_upc].productPrice) checkValue(_upc) onlyDistributor() public payable 
     {
-      
         // Update the appropriate fields - ownerID, distributorID, itemState
         items[_upc].ownerID = msg.sender;
         items[_upc].distributorID = msg.sender;
@@ -249,7 +248,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   
     // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
     // Use the above modifiers to check if the item is shipped
-    function receiveItem(uint _upc) shipped(_upc) onlyRetailer() public payable
+    function receiveItem(uint _upc) shipped(_upc) paidEnough(items[_upc].productPrice) checkValue(_upc) onlyRetailer() public payable
     {
         // Update the appropriate fields - ownerID, retailerID, itemState
         items[_upc].ownerID = msg.sender;
@@ -265,7 +264,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
   
     // Define a function 'purchaseItem' that allows the consumer to mark an item 'Purchased'
     // Use the above modifiers to check if the item is received
-    function purchaseItem(uint _upc) received(_upc) onlyConsumer() public payable
+    function purchaseItem(uint _upc) received(_upc) paidEnough(items[_upc].productPrice) checkValue(_upc) onlyConsumer() public payable
     {
         // Update the appropriate fields - ownerID, consumerID, itemState
         items[_upc].ownerID = msg.sender;

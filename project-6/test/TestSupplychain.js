@@ -121,7 +121,8 @@ contract('SupplyChain', function(accounts) {
 
         await supplyChain.addDistributor(distributorID);
 
-        let result = await supplyChain.buyItem(upc, {from: distributorID, value: productPrice})
+        //let result = await supplyChain.buyItem(upc, {from: distributorID, value: productPrice})
+        let result = await supplyChain.buyItem(upc, {from: distributorID, value: web3.utils.toWei("3", "ether")})
 
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
         
@@ -152,7 +153,8 @@ contract('SupplyChain', function(accounts) {
         
         await supplyChain.addRetailer(retailerID);
 
-        let result = await supplyChain.receiveItem(upc, {from: retailerID, value: productPrice})
+        //let result = await supplyChain.receiveItem(upc, {from: retailerID, value: productPrice})
+        let result = await supplyChain.receiveItem(upc, {from: retailerID, value: web3.utils.toWei("3", "ether")})
 
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
         
@@ -170,7 +172,8 @@ contract('SupplyChain', function(accounts) {
         
         await supplyChain.addConsumer(consumerID);
 
-        let result = await supplyChain.purchaseItem(upc, {from: consumerID, value: productPrice})
+        //let result = await supplyChain.purchaseItem(upc, {from: consumerID, value: productPrice})
+        let result = await supplyChain.purchaseItem(upc, {from: consumerID, value: web3.utils.toWei("3", "ether")})
 
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
         
