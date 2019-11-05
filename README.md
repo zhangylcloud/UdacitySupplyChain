@@ -90,6 +90,20 @@ In a separate terminal window, launch the DApp:
 npm run dev
 ```
 
+Transaction History
+Harvested - 0xf7e825139592533bd739f11cafe7aa9acc56b768b45f940432ab0ad4d538f1ca
+Processed - 0xa801195814c5f22b1e857aae2c289f0eb510e381e2c5be8b9d0c561e22459869
+Packed - 0x144388d21fa647a8e3ba326999fa5f1787c952bfb55a57da2fa0b68b65b15a59
+ForSale - 0xbe5da699c3e2f365271ea17499954f5407c6e1c1739f9173c3a4dbf7131c36dd
+AddedDistributor - 0x134a0158ca5cfb0082649ccffef09e089f0c8f92941280915e361aef647d7ea5
+Sold - 0x6b05f4c2b0bd0d83305dc8eed9fe3804fafa98ff2b30cb9e7858bc435b75a915
+Shipped - 0x49b442e15c800e91cd32fc67f523c42e17486f0ec9fd700f416c51c5f604cf07
+AddedRetailer - 0x7a42c73ab9bc638f4b7c5854f0dc5f9746165b67b4d19fd5ee5dbf5798fc52ad
+Received - 0xd7e40f00e3cd760697799998f54462b215cd403d636465135902221c55cc36b8
+AddedConsumer - 0x1eae9e1c41a78962dcd157cba73181df8ff2080e8773917e1481cd35ab5c8d4c
+Purchased - 0xb1dea65bbfc6c2faaaae606aeaacf0caeea95d8fa84509edd0f8d6e73dfda804
+
+
 ## Built With
 
 * [Ethereum](https://www.ethereum.org/) - Ethereum is a decentralized platform that runs smart contracts
