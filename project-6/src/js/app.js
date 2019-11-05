@@ -160,6 +160,18 @@ App = {
             case 10:
                 return await App.fetchItemBufferTwo(event);
                 break;
+            case 31:
+                return await App.addFarmer(event);
+                break;
+            case 32:
+                return await App.addDistributor(event);
+                break;
+            case 33:
+                return await App.addRetailer(event);
+                break;
+            case 34:
+                return await App.addConsumer(event);
+                break;
             }
     },
 
@@ -313,6 +325,70 @@ App = {
         }).catch(function(err) {
           console.log(err.message);
         });
+    },
+
+    addFarmer: async function () {
+        console.log("-----App.metamaskAccountID is ");
+        console.log(App.metamaskAccountID);
+        let instance = await App.contracts.SupplyChain.deployed(); 
+        let alreadyExist = await instance.isFarmer.call(App.metamaskAccountID);
+        console.log("-----is Farmer?");
+        console.log(alreadyExist);
+        if(!alreadyExist){
+            let result = await instance.addFarmer(App.metamaskAccountID);
+            if(!result){
+                $("#ftc-item").text(result);
+                console.log('added farmer', retult);
+            }
+        }
+    },
+
+    addDistributor: async function () {
+        console.log("-----App.metamaskAccountID is ");
+        console.log(App.metamaskAccountID);
+        let instance = await App.contracts.SupplyChain.deployed(); 
+        let alreadyExist = await instance.isDistributor.call(App.metamaskAccountID);
+        console.log("-----is Distributor?");
+        console.log(alreadyExist);
+        if(!alreadyExist){
+            let result = await instance.addDistributor(App.metamaskAccountID);
+            if(!result){
+                $("#ftc-item").text(result);
+                console.log('added distributor', retult);
+            }
+        }
+    },
+
+    addRetailer: async function () {
+        console.log("-----App.metamaskAccountID is ");
+        console.log(App.metamaskAccountID);
+        let instance = await App.contracts.SupplyChain.deployed(); 
+        let alreadyExist = await instance.isRetailer.call(App.metamaskAccountID);
+        console.log("-----is retailer?");
+        console.log(alreadyExist);
+        if(!alreadyExist){
+            let result = await instance.addRetailer(App.metamaskAccountID);
+            if(!result){
+                $("#ftc-item").text(result);
+                console.log('added retailer', retult);
+            }
+        }
+    },
+
+    addConsumer: async function () {
+        console.log("-----App.metamaskAccountID is ");
+        console.log(App.metamaskAccountID);
+        let instance = await App.contracts.SupplyChain.deployed(); 
+        let alreadyExist = await instance.isConsumer.call(App.metamaskAccountID);
+        console.log("-----is consumer?");
+        console.log(alreadyExist);
+        if(!alreadyExist){
+            let result = await instance.addConsumer(App.metamaskAccountID);
+            if(!result){
+                $("#ftc-item").text(result);
+                console.log('added consumer', retult);
+            }
+        }
     },
 
     fetchEvents: function () {
