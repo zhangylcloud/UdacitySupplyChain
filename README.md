@@ -1,3 +1,47 @@
+# Udacity Project 6 Supply Chain
+
+## Contract Address
+>
+    0x3fDDE1f783619A623634F7636d4b285232A830DD 
+>
+
+## Contract Transactions
+<https://rinkeby.etherscan.io/address/0x3fDDE1f783619A623634F7636d4b285232A830DD#events>
+
+Transaction History
+Harvested - 0x42976d4b0d9a03d7917c860eec1f2b55c4cf0438198cdc3ab809ac1a395cdd94
+Processed - 0x3e66187fb21396d520519e7a59e8ed16725bff616b1413a5c2650681479516c7
+Packed - 0x86343eeb81853d3889183e8623447b571ebc364cf522103d29d55bb9fc2dc261
+ForSale - 0x4741414581d5a231d2d81e90b9491aeafa024e49669705eea5a3afea4275b0f3
+AddedDistributor - 0x922931a6f2799887e4e19f3f279aa81dc02c803234d313ffdd4471b0bc056520
+Sold - 0xf5046f2349eff91b822a8da987da8a2e6928732c59612508f7eedbebf54418ad
+Shipped - 0xa7929efc1abb29b23f1a10ac3ae83a5a4a9daa7bb697199fd86c6f5d813099af
+AddedRetailer - 0x1123d61375b3dc5e8a4ccd1345a144627124f2831b692c4a3b2e890d2aba94c4
+Received - 0xb511d084e26c1ec6747a1e03d3b08d883201fbf9751cdf6ed44dffc1810b75d1
+AddedConsumer - 0x8811e42a662b9e9ccffbbff45e8e34c11ff6f591d463fef8647f2c9c7eb4b534
+
+## UML
+### Activity Diagram
+![Activity Diagram](images/activity-diagram.png)
+
+### Sequence Diagram
+![Sequence Diagram](images/sequence-diagram.png)
+
+### State Diagram
+![State Diagram](images/state-diagram.png)
+
+### Class Diagram (Data Model)
+![Class Diagram](images/class-diagram.png)
+
+## Libraries
+Roles.sol has a Roles library. The Roles library will be used by different access control contracts for easy add and remove players in the supply chain. 
+
+## IPFS
+IPFS is not used in this project
+
+## Notes
+Remember only Farmer can call harvestItem, processItem, packItem, add Item. Only Distributor can call buyItem and shipItem. Only Retailer can call receiveItem. Only Consumer can call purchaseItem. So before calling each function, please go to that specific account in metamask and click add role button to add that account as a role. For example, click "Add as Farmer" button to add that metamask account as a farmer, before calling those farmer only functions.
+
 # Supply chain & data auditing
 
 This repository containts an Ethereum DApp that demonstrates a Supply Chain flow between a Seller and Buyer. The user story is similar to any commonly used supply chain process. A Seller can add items to the inventory system stored in the blockchain. A Buyer can purchase such items from the inventory system. Additionally a Seller can mark an item as Shipped, and similarly a Buyer can mark an item as Received.
@@ -89,20 +133,6 @@ In a separate terminal window, launch the DApp:
 ```
 npm run dev
 ```
-
-Transaction History
-Harvested - 0xf7e825139592533bd739f11cafe7aa9acc56b768b45f940432ab0ad4d538f1ca
-Processed - 0xa801195814c5f22b1e857aae2c289f0eb510e381e2c5be8b9d0c561e22459869
-Packed - 0x144388d21fa647a8e3ba326999fa5f1787c952bfb55a57da2fa0b68b65b15a59
-ForSale - 0xbe5da699c3e2f365271ea17499954f5407c6e1c1739f9173c3a4dbf7131c36dd
-AddedDistributor - 0x134a0158ca5cfb0082649ccffef09e089f0c8f92941280915e361aef647d7ea5
-Sold - 0x6b05f4c2b0bd0d83305dc8eed9fe3804fafa98ff2b30cb9e7858bc435b75a915
-Shipped - 0x49b442e15c800e91cd32fc67f523c42e17486f0ec9fd700f416c51c5f604cf07
-AddedRetailer - 0x7a42c73ab9bc638f4b7c5854f0dc5f9746165b67b4d19fd5ee5dbf5798fc52ad
-Received - 0xd7e40f00e3cd760697799998f54462b215cd403d636465135902221c55cc36b8
-AddedConsumer - 0x1eae9e1c41a78962dcd157cba73181df8ff2080e8773917e1481cd35ab5c8d4c
-Purchased - 0xb1dea65bbfc6c2faaaae606aeaacf0caeea95d8fa84509edd0f8d6e73dfda804
-
 
 ## Built With
 
