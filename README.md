@@ -50,22 +50,8 @@ Roles.sol has a Roles library. The Roles library will be used by different acces
 ## IPFS
 IPFS is not used in this project
 
-## Notes
+## General Write-up 
 Remember only Farmer can call harvestItem, processItem, packItem, add Item. Only Distributor can call buyItem and shipItem. Only Retailer can call receiveItem. Only Consumer can call purchaseItem. So before calling each function, please go to that specific account in metamask and click add role button to add that account as a role. For example, click "Add as Farmer" button to add that metamask account as a farmer, before calling those farmer only functions.
-
-# Supply chain & data auditing
-
-This repository containts an Ethereum DApp that demonstrates a Supply Chain flow between a Seller and Buyer. The user story is similar to any commonly used supply chain process. A Seller can add items to the inventory system stored in the blockchain. A Buyer can purchase such items from the inventory system. Additionally a Seller can mark an item as Shipped, and similarly a Buyer can mark an item as Received.
-
-The DApp User Interface when running should look like...
-
-![truffle test](images/ftc_product_overview.png)
-
-![truffle test](images/ftc_farm_details.png)
-
-![truffle test](images/ftc_product_details.png)
-
-![truffle test](images/ftc_transaction_history.png)
 
 
 ## Getting Started
