@@ -179,7 +179,7 @@ App = {
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
 
-        App.contracts.SupplyChain.deployed().then(function(instance) {
+        App.contracts.SupplyChain.at("0x3fDDE1f783619A623634F7636d4b285232A830DD").then(function(instance) {
             return instance.harvestItem(
                 App.upc, 
                 App.metamaskAccountID, 
