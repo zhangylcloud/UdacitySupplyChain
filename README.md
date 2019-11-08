@@ -33,16 +33,16 @@ Purchased - 0x8822e82c3eacec9c4bcd5f711118df1ffb9030a193e14024389623c1d365a44a
 
 ## UML
 ### Activity Diagram
-![Activity Diagram](images/activity-diagram.png)
+![Activity Diagram](images/Activity.jpg)
 
 ### Sequence Diagram
-![Sequence Diagram](images/sequence-diagram.png)
+![Sequence Diagram](images/Sequence.jpg)
 
 ### State Diagram
-![State Diagram](images/state-diagram.png)
+![State Diagram](images/State.jpg)
 
 ### Class Diagram (Data Model)
-![Class Diagram](images/class-diagram.png)
+![Class Diagram](images/Class.jpg)
 
 ## Libraries
 Roles.sol has a Roles library. The Roles library will be used by different access control contracts for easy add and remove players in the supply chain. 
